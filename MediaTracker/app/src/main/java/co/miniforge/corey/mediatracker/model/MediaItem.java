@@ -13,7 +13,6 @@ import co.miniforge.corey.mediatracker.media_store.Md5IdHelper;
  */
 
 public class MediaItem {
-    public static int defaultId = 0;
 
     public String id;
     public String title;
@@ -33,7 +32,7 @@ public class MediaItem {
     }
 
     public MediaItem(){
-        this.id = Md5IdHelper.idForObject(defaultId++);
+        this.id = Md5IdHelper.idForObject(this);
         this.title = "defaultTitle";
         this.description = "defaultDescription";
         this.url = "defaultUrl";
