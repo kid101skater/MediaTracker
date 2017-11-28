@@ -18,6 +18,7 @@ public class MediaItem {
     public String title;
     public String description;
     public String url;
+    
 
     public MediaItem(JSONObject jsonObject){
         try{

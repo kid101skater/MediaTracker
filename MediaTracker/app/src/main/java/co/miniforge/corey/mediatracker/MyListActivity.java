@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -133,6 +134,36 @@ public class MyListActivity extends AppCompatActivity {
 
         storageUtil.saveMediaData(mediaItems);
         updateMediaItems(storageUtil.getMediaDataList());
+    }
 
+    public void sortMedia(String sortBy){
+        MediaItemSortHelper sorter = new MediaItemSortHelper();
+        switch(sortBy) {
+            case "type": mediaItems = sorter.sortByType(mediaItems);
+            case "name" : mediaItems = sorter.sortByName(mediaItems);
+            default : break;
+        }
+        storageUtil.saveMediaData(mediaItems);
+        updateMediaItems(mediaItems);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_my_list,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.sortByName :
+                sortMedia("name");
+                break;
+            case R.id.sortByType :
+                sortMedia("type");
+                break;
+        }
+        return true;
     }
 }
